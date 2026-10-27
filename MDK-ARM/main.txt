@@ -5,201 +5,222 @@
                           AREA ||i.Error_Handler||, CODE, READONLY, ALIGN=1
 
                   Error_Handler PROC
-;;;168      */
-;;;169    void Error_Handler(void)
+;;;175      */
+;;;176    void Error_Handler(void)
 000000  b672              CPSID    i
-;;;170    {
-;;;171      /* USER CODE BEGIN Error_Handler_Debug */
-;;;172      /* User can add his own implementation to report the HAL error return state */
-;;;173      __disable_irq();
-;;;174      while (1)
+;;;177    {
+;;;178      /* USER CODE BEGIN Error_Handler_Debug */
+;;;179      /* User can add his own implementation to report the HAL error return state */
+;;;180      __disable_irq();
+;;;181      while (1)
 000002  bf00              NOP      
                   |L1.4|
 000004  e7fe              B        |L1.4|
-;;;175      {
-;;;176      }
-;;;177      /* USER CODE END Error_Handler_Debug */
-;;;178    }
-;;;179    
+;;;182      {
+;;;183      }
+;;;184      /* USER CODE END Error_Handler_Debug */
+;;;185    }
+;;;186    
                           ENDP
 
 
                           AREA ||i.SystemClock_Config||, CODE, READONLY, ALIGN=1
 
                   SystemClock_Config PROC
-;;;118      */
-;;;119    void SystemClock_Config(void)
+;;;125      */
+;;;126    void SystemClock_Config(void)
 000000  b500              PUSH     {lr}
-;;;120    {
+;;;127    {
 000002  b093              SUB      sp,sp,#0x4c
-;;;121      RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+;;;128      RCC_OscInitTypeDef RCC_OscInitStruct = {0};
 000004  2128              MOVS     r1,#0x28
 000006  a809              ADD      r0,sp,#0x24
 000008  f7fffffe          BL       __aeabi_memclr4
-;;;122      RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+;;;129      RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 00000c  2114              MOVS     r1,#0x14
 00000e  a804              ADD      r0,sp,#0x10
 000010  f7fffffe          BL       __aeabi_memclr4
-;;;123      RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+;;;130      RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 000014  2000              MOVS     r0,#0
 000016  9000              STR      r0,[sp,#0]
 000018  9001              STR      r0,[sp,#4]
 00001a  9002              STR      r0,[sp,#8]
 00001c  9003              STR      r0,[sp,#0xc]
-;;;124    
-;;;125      /** Initializes the RCC Oscillators according to the specified parameters
-;;;126      * in the RCC_OscInitTypeDef structure.
-;;;127      */
-;;;128      RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+;;;131    
+;;;132      /** Initializes the RCC Oscillators according to the specified parameters
+;;;133      * in the RCC_OscInitTypeDef structure.
+;;;134      */
+;;;135      RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
 00001e  2001              MOVS     r0,#1
 000020  9009              STR      r0,[sp,#0x24]
-;;;129      RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+;;;136      RCC_OscInitStruct.HSEState = RCC_HSE_ON;
 000022  0400              LSLS     r0,r0,#16
 000024  900a              STR      r0,[sp,#0x28]
-;;;130      RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+;;;137      RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
 000026  2000              MOVS     r0,#0
 000028  900b              STR      r0,[sp,#0x2c]
-;;;131      RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+;;;138      RCC_OscInitStruct.HSIState = RCC_HSI_ON;
 00002a  2001              MOVS     r0,#1
 00002c  900d              STR      r0,[sp,#0x34]
-;;;132      RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+;;;139      RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
 00002e  2002              MOVS     r0,#2
 000030  9010              STR      r0,[sp,#0x40]
-;;;133      RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+;;;140      RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
 000032  03c1              LSLS     r1,r0,#15
 000034  9111              STR      r1,[sp,#0x44]
-;;;134      RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+;;;141      RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
 000036  f44f11e0          MOV      r1,#0x1c0000
 00003a  9112              STR      r1,[sp,#0x48]
-;;;135      if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+;;;142      if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
 00003c  a809              ADD      r0,sp,#0x24
 00003e  f7fffffe          BL       HAL_RCC_OscConfig
 000042  b108              CBZ      r0,|L2.72|
-;;;136      {
-;;;137        Error_Handler();
+;;;143      {
+;;;144        Error_Handler();
 000044  f7fffffe          BL       Error_Handler
                   |L2.72|
-;;;138      }
-;;;139    
-;;;140      /** Initializes the CPU, AHB and APB buses clocks
-;;;141      */
-;;;142      RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+;;;145      }
+;;;146    
+;;;147      /** Initializes the CPU, AHB and APB buses clocks
+;;;148      */
+;;;149      RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
 000048  200f              MOVS     r0,#0xf
 00004a  9004              STR      r0,[sp,#0x10]
-;;;143                                  |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-;;;144      RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+;;;150                                  |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+;;;151      RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 00004c  2002              MOVS     r0,#2
 00004e  9005              STR      r0,[sp,#0x14]
-;;;145      RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+;;;152      RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
 000050  2000              MOVS     r0,#0
 000052  9006              STR      r0,[sp,#0x18]
-;;;146      RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+;;;153      RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
 000054  f44f6080          MOV      r0,#0x400
 000058  9007              STR      r0,[sp,#0x1c]
-;;;147      RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+;;;154      RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 00005a  2000              MOVS     r0,#0
 00005c  9008              STR      r0,[sp,#0x20]
-;;;148    
-;;;149      if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+;;;155    
+;;;156      if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
 00005e  2102              MOVS     r1,#2
 000060  a804              ADD      r0,sp,#0x10
 000062  f7fffffe          BL       HAL_RCC_ClockConfig
 000066  b108              CBZ      r0,|L2.108|
-;;;150      {
-;;;151        Error_Handler();
+;;;157      {
+;;;158        Error_Handler();
 000068  f7fffffe          BL       Error_Handler
                   |L2.108|
-;;;152      }
-;;;153      PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+;;;159      }
+;;;160      PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
 00006c  2002              MOVS     r0,#2
 00006e  9000              STR      r0,[sp,#0]
-;;;154      PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+;;;161      PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
 000070  0380              LSLS     r0,r0,#14
 000072  9002              STR      r0,[sp,#8]
-;;;155      if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+;;;162      if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
 000074  4668              MOV      r0,sp
 000076  f7fffffe          BL       HAL_RCCEx_PeriphCLKConfig
 00007a  b108              CBZ      r0,|L2.128|
-;;;156      {
-;;;157        Error_Handler();
+;;;163      {
+;;;164        Error_Handler();
 00007c  f7fffffe          BL       Error_Handler
                   |L2.128|
-;;;158      }
-;;;159    }
+;;;165      }
+;;;166    }
 000080  b013              ADD      sp,sp,#0x4c
 000082  bd00              POP      {pc}
-;;;160    
+;;;167    
                           ENDP
 
+
+                          AREA ||i.fputc||, CODE, READONLY, ALIGN=2
+
+                  fputc PROC
+;;;60     #endif /*__GNUC__*/
+;;;61     PUTCHAR_PROTOTYPE
+000000  b513              PUSH     {r0,r1,r4,lr}
+;;;62     {
+000002  460c              MOV      r4,r1
+;;;63     	HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
+000004  f64f73ff          MOV      r3,#0xffff
+000008  2201              MOVS     r2,#1
+00000a  4669              MOV      r1,sp
+00000c  4801              LDR      r0,|L3.20|
+00000e  f7fffffe          BL       HAL_UART_Transmit
+;;;64     }
+000012  bd1c              POP      {r2-r4,pc}
+;;;65     /* USER CODE END PFP */
+                          ENDP
+
+                  |L3.20|
+                          DCD      huart1
 
                           AREA ||i.main||, CODE, READONLY, ALIGN=2
 
                   main PROC
-;;;67       */
-;;;68     int main(void)
+;;;75       */
+;;;76     int main(void)
 000000  f7fffffe          BL       HAL_Init
-;;;69     {
-;;;70     
-;;;71       /* USER CODE BEGIN 1 */
-;;;72     
-;;;73       /* USER CODE END 1 */
-;;;74     
-;;;75       /* MCU Configuration--------------------------------------------------------*/
-;;;76     
-;;;77       /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-;;;78       HAL_Init();
-;;;79     
-;;;80       /* USER CODE BEGIN Init */
-;;;81     
-;;;82       /* USER CODE END Init */
-;;;83     
-;;;84       /* Configure the system clock */
-;;;85       SystemClock_Config();
+;;;77     {
+;;;78     
+;;;79       /* USER CODE BEGIN 1 */
+;;;80     
+;;;81       /* USER CODE END 1 */
+;;;82     
+;;;83       /* MCU Configuration--------------------------------------------------------*/
+;;;84     
+;;;85       /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+;;;86       HAL_Init();
+;;;87     
+;;;88       /* USER CODE BEGIN Init */
+;;;89     
+;;;90       /* USER CODE END Init */
+;;;91     
+;;;92       /* Configure the system clock */
+;;;93       SystemClock_Config();
 000004  f7fffffe          BL       SystemClock_Config
-;;;86     
-;;;87       /* USER CODE BEGIN SysInit */
-;;;88     
-;;;89       /* USER CODE END SysInit */
-;;;90     
-;;;91       /* Initialize all configured peripherals */
-;;;92       MX_GPIO_Init();
+;;;94     
+;;;95       /* USER CODE BEGIN SysInit */
+;;;96     
+;;;97       /* USER CODE END SysInit */
+;;;98     
+;;;99       /* Initialize all configured peripherals */
+;;;100      MX_GPIO_Init();
 000008  f7fffffe          BL       MX_GPIO_Init
-;;;93       MX_DMA_Init();
+;;;101      MX_DMA_Init();
 00000c  f7fffffe          BL       MX_DMA_Init
-;;;94       MX_ADC1_Init();
+;;;102      MX_ADC1_Init();
 000010  f7fffffe          BL       MX_ADC1_Init
-;;;95       MX_TIM3_Init();
+;;;103      MX_TIM3_Init();
 000014  f7fffffe          BL       MX_TIM3_Init
-;;;96       MX_USART3_UART_Init();
+;;;104      MX_USART3_UART_Init();
 000018  f7fffffe          BL       MX_USART3_UART_Init
-;;;97       MX_USART1_UART_Init();
+;;;105      MX_USART1_UART_Init();
 00001c  f7fffffe          BL       MX_USART1_UART_Init
-;;;98       /* USER CODE BEGIN 2 */
-;;;99     //	HAL_TIM_Base_MspInit(&htim3);
-;;;100    	HAL_TIM_Base_Start_IT(&htim3);
-000020  4802              LDR      r0,|L3.44|
+;;;106      /* USER CODE BEGIN 2 */
+;;;107    	HAL_TIM_Base_Start_IT(&htim3);
+000020  4802              LDR      r0,|L4.44|
 000022  f7fffffe          BL       HAL_TIM_Base_Start_IT
-;;;101      /* USER CODE END 2 */
-;;;102    
-;;;103      /* Infinite loop */
-;;;104      /* USER CODE BEGIN WHILE */
-;;;105      while (1)
-000026  bf00              NOP      
-                  |L3.40|
-000028  e7fe              B        |L3.40|
-;;;106      {
-;;;107    	
-;;;108        /* USER CODE END WHILE */
+;;;108      /* USER CODE END 2 */
 ;;;109    
-;;;110        /* USER CODE BEGIN 3 */
-;;;111      }
-;;;112      /* USER CODE END 3 */
-;;;113    }
-;;;114    
+;;;110      /* Infinite loop */
+;;;111      /* USER CODE BEGIN WHILE */
+;;;112      while (1)
+000026  bf00              NOP      
+                  |L4.40|
+000028  e7fe              B        |L4.40|
+;;;113      {
+;;;114    	
+;;;115        /* USER CODE END WHILE */
+;;;116    
+;;;117        /* USER CODE BEGIN 3 */
+;;;118      }
+;;;119      /* USER CODE END 3 */
+;;;120    }
+;;;121    
                           ENDP
 
 00002a  0000              DCW      0x0000
-                  |L3.44|
+                  |L4.44|
                           DCD      htim3
 
 ;*** Start embedded assembler ***
@@ -207,9 +228,9 @@
 #line 1 "../Core/Src/main.c"
 	AREA ||.rev16_text||, CODE
 	THUMB
-	EXPORT |__asm___6_main_c_main____REV16|
+	EXPORT |__asm___6_main_c_fputc____REV16|
 #line 463 "../Drivers/CMSIS/Include/cmsis_armcc.h"
-|__asm___6_main_c_main____REV16| PROC
+|__asm___6_main_c_fputc____REV16| PROC
 #line 464
 
  rev16 r0, r0
@@ -217,9 +238,9 @@
 	ENDP
 	AREA ||.revsh_text||, CODE
 	THUMB
-	EXPORT |__asm___6_main_c_main____REVSH|
+	EXPORT |__asm___6_main_c_fputc____REVSH|
 #line 478
-|__asm___6_main_c_main____REVSH| PROC
+|__asm___6_main_c_fputc____REVSH| PROC
 #line 479
 
  revsh r0, r0
@@ -227,9 +248,9 @@
 	ENDP
 	AREA ||.rrx_text||, CODE
 	THUMB
-	EXPORT |__asm___6_main_c_main____RRX|
+	EXPORT |__asm___6_main_c_fputc____RRX|
 #line 665
-|__asm___6_main_c_main____RRX| PROC
+|__asm___6_main_c_fputc____RRX| PROC
 #line 666
 
  rrx r0, r0

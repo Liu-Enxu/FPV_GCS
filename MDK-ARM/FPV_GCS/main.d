@@ -35,3 +35,4 @@ fpv_gcs\main.o: ../Core/Inc/dma.h
 fpv_gcs\main.o: ../Core/Inc/tim.h
 fpv_gcs\main.o: ../Core/Inc/usart.h
 fpv_gcs\main.o: ../Core/Inc/gpio.h
+fpv_gcs\main.o: F:\Keil\Core\ARM\ARMCC\Bin\..\include\stdio.h

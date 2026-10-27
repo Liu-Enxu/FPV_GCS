@@ -113,9 +113,10 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
   * @param  htim TIM handle
   * @retval None
   */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+////    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+//	printf("TIM3 Update Event!\r\n");
+//}
 
 /* USER CODE END 1 */

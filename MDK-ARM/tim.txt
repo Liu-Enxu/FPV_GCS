@@ -113,17 +113,25 @@
 000000  b510              PUSH     {r4,lr}
 ;;;117    {
 000002  4604              MOV      r4,r0
-;;;118        HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-000004  f44f5100          MOV      r1,#0x2000
-000008  4801              LDR      r0,|L3.16|
-00000a  f7fffffe          BL       HAL_GPIO_TogglePin
-;;;119    }
-00000e  bd10              POP      {r4,pc}
-;;;120    
+;;;118    //    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+;;;119    	printf("TIM3 Update Event!\r\n");
+000004  a001              ADR      r0,|L3.12|
+000006  f7fffffe          BL       __2printf
+;;;120    }
+00000a  bd10              POP      {r4,pc}
+;;;121    
                           ENDP
 
-                  |L3.16|
-                          DCD      0x40011000
+                  |L3.12|
+00000c  54494d33          DCB      "TIM3 Update Event!\r\n",0
+000010  20557064
+000014  61746520
+000018  4576656e
+00001c  74210d0a
+000020  00      
+000021  00                DCB      0
+000022  00                DCB      0
+000023  00                DCB      0
 
                           AREA ||i.MX_TIM3_Init||, CODE, READONLY, ALIGN=2
 

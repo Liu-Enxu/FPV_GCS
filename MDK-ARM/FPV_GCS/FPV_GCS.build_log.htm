@@ -28,11 +28,13 @@ Project File Date:  10/27/2026
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'F:\Keil\Core\ARM\ARMCC\Bin'
 Build target 'FPV_GCS'
 compiling tim.c...
-compiling main.c...
+../Core/Src/tim.c(119): warning:  #223-D: function "printf" declared implicitly
+  	printf("TIM3 Update Event!\r\n");
+../Core/Src/tim.c: 1 warning, 0 errors
 linking...
-Program Size: Code=7896 RO-data=312 RW-data=16 ZI-data=1360  
+Program Size: Code=8404 RO-data=312 RW-data=20 ZI-data=1356  
 FromELF: creating hex file...
-"FPV_GCS\FPV_GCS.axf" - 0 Error(s), 0 Warning(s).
+"FPV_GCS\FPV_GCS.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,7 +58,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
